@@ -1,16 +1,35 @@
 package application;
 
+import java.awt.Frame;
+
+import javax.swing.JFrame;
+
 import com.itextpdf.kernel.pdf.PdfDocument;
 
-public class Display {
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import com.qoppa.pdf.*;
+import com.qoppa.pdfNotes.PDFNotesBean;
+
+import com.qoppa.pdfViewerFX.PDFViewer;
+
+
+
+public class Display extends JFrame {
 	
 	
-	public static void display(PdfDocument document)
-	{
-		
-		// write a code to display in javafx scrollpane area
+	
+	public Display(String file) throws PDFException {
+		// TODO Auto-generated constructor stub
+	
 		
 	}
+	
+	
+	
 	
 
 }

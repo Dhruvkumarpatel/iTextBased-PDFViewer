@@ -10,11 +10,13 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 
+
+
 public class PdfDocumentcreation {
 
 	public static final String tempdest = "src/application/temp.pdf";
 
-	public static PdfDocument createFromOld(String source) throws FileNotFoundException, IOException {
+	public static String createFromOld(String source) throws FileNotFoundException, IOException {
 
 		PdfDocument uploadeddocument = new PdfDocument(new PdfReader(source));
 
@@ -23,17 +25,15 @@ public class PdfDocumentcreation {
 		
 		int noofpages = uploadeddocument.getNumberOfPages();
 		
-		
-
 		uploadeddocument.copyPagesTo(1, noofpages, newdocument);
 		
 		Document newone = new Document(newdocument);
-		
-		//newone.close();
+				
+		newone.close();
 		
 		System.out.println("no of pages :"+noofpages);
 		
-		return newdocument;
+		return tempdest;
 
 	}
 
