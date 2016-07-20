@@ -31,7 +31,6 @@ public class Annotations {
 		assert (pageNum > 0 && pageNum <= myDocument.getNumberOfPages());
 
 		System.out.println("LRTB: " + myDocument.getDefaultPageSize().getLeft() + " " + myDocument.getDefaultPageSize().getRight() + " " + myDocument.getDefaultPageSize().getTop() + " " + myDocument.getDefaultPageSize().getBottom());
-		System.out.println("pageSize: " + myDocument.getDefaultPageSize().getX() + " " + myDocument.getDefaultPageSize().getY());
 
         PdfAnnotation ann = PdfTextMarkupAnnotation.createHighLight(new Rectangle(x, y, width, height),
                 new float[]{x, y+height, x, y, x+width, y+height, x + width, y})

@@ -22,19 +22,19 @@ public class PdfDocumentcreation {
 	static PdfDocument myDocument;
 
 	public static final String tempdest = "src/application/temp.pdf";
+	public static final String tempdest2 = "src/application/temp2.pdf";
 
 	public static String createFromOld(String source) throws FileNotFoundException, IOException {
 
 		PdfDocument uploadeddocument = new PdfDocument(new PdfReader(source));
 
-		PdfDocument newdocument = new PdfDocument(new PdfWriter(tempdest));
-
+		myDocument = new PdfDocument(new PdfWriter(tempdest));
 
 		int noofpages = uploadeddocument.getNumberOfPages();
 
-		uploadeddocument.copyPagesTo(1, noofpages, newdocument);
+		uploadeddocument.copyPagesTo(1, noofpages, myDocument);
 
-		Document newone = new Document(newdocument);
+		Document newone = new Document(myDocument);
 
 		newone.close();
 
@@ -71,7 +71,7 @@ public class PdfDocumentcreation {
 	public static String openPDF(String source) throws IOException {
 
 		PdfDocument uploadeddocument = new PdfDocument(new PdfReader(source));
-		myDocument = new PdfDocument(new PdfWriter(tempdest));
+		myDocument = new PdfDocument(new PdfWriter(tempdest2));
 
 		int noofpages = uploadeddocument.getNumberOfPages();
 
@@ -79,7 +79,7 @@ public class PdfDocumentcreation {
 
 		uploadeddocument.close();
 
-		return tempdest;
+		return tempdest2;
 	}
 
 	public static boolean savePDF() {
@@ -91,6 +91,14 @@ public class PdfDocumentcreation {
 		myDocument.close();
 
 		return true;
+	}
+
+	public static PdfDocument getDocument() {
+		return myDocument;
+	}
+
+	public static void reOpenDocument() throws IOException {
+		myDocument = new PdfDocument(new PdfReader(tempdest2));
 	}
 
 }
