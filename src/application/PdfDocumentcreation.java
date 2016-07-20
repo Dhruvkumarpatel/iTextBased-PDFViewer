@@ -55,6 +55,16 @@ public class PdfDocumentcreation {
 		Annotations.addStrikeThroughAnnotation(myDocument, 100,100,100,100,4);
 		Annotations.addBoxAnnotation(myDocument, 100,100,100,20,5);
 
+		Annotations.printAnnots(myDocument, 1);
+		Annotations.printAnnots(myDocument, 2);
+		Annotations.printAnnots(myDocument, 3);
+		Annotations.printAnnots(myDocument, 4);
+		Annotations.printAnnots(myDocument, 5);
+
+		Annotations.deleteAnnot(myDocument, 3, 242, 595);
+
+		Annotations.printAnnots(myDocument, 3);
+
 		return true;
 	}
 
@@ -63,19 +73,20 @@ public class PdfDocumentcreation {
 		PdfDocument uploadeddocument = new PdfDocument(new PdfReader(source));
 		myDocument = new PdfDocument(new PdfWriter(tempdest));
 
-
 		int noofpages = uploadeddocument.getNumberOfPages();
 
 		uploadeddocument.copyPagesTo(1, noofpages, myDocument);
 
 		uploadeddocument.close();
 
-		System.out.println("newdocument: " + myDocument.getNumberOfPages() + " " + myDocument.toString());
-
 		return tempdest;
 	}
 
 	public static boolean savePDF() {
+
+		Document newone = new Document(myDocument);
+
+		newone.close();
 
 		myDocument.close();
 
