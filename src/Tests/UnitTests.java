@@ -135,7 +135,7 @@ public class UnitTests {
 	
 	static void main(String[] args) {
 		testInputFile();
-		//testFileSave();
+		testFileSave();
 		//testAddUnderlineAnnotation();
 		//testAddHighlightAnnotation();
 		//testAddStrikeThroughAnnotation();
