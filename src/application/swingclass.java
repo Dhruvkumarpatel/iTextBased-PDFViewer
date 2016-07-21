@@ -34,6 +34,9 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPage;
 import com.sun.pdfview.PagePanel;
+
+import junit.framework.Assert;
+
 import com.sun.pdfview.PDFRenderer;
 
 public class swingclass extends JFrame implements ActionListener {
@@ -56,6 +59,8 @@ public class swingclass extends JFrame implements ActionListener {
 
 	int i = 1, n;
 
+	
+	
 	public swingclass(String filename) throws IOException {
 		// TODO Auto-generated constructor stub
 
@@ -275,8 +280,7 @@ public class swingclass extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-    			
-    			
+    				
     		}
 		}
 

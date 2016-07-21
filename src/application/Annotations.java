@@ -24,7 +24,7 @@ public class Annotations {
 	 * @param height of rectangle
 	 * @return
 	 */
-	static boolean addHighlightAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+	public static boolean addHighlightAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
 		assert(myDocument != null);
 		assert (x >= 0 && x <= myDocument.getDefaultPageSize().getRight());
 		assert (y >= 0 && y <= myDocument.getDefaultPageSize().getTop());
@@ -56,7 +56,7 @@ public class Annotations {
 	 * @param height of rectangle
 	 * @return
 	 */
-	static boolean addUnderlineAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+	public static boolean addUnderlineAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
 		assert(myDocument != null);
 		assert (x >= 0 && x <= myDocument.getDefaultPageSize().getRight());
 		assert (y >= 0 && y <= myDocument.getDefaultPageSize().getTop());
@@ -85,7 +85,7 @@ public class Annotations {
 	 * @param height of rectangle
 	 * @return
 	 */
-	static boolean addStrikeThroughAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+	public static boolean addStrikeThroughAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
 		assert(myDocument != null);
 		assert (x >= 0 && x <= myDocument.getDefaultPageSize().getRight());
 		assert (y >= 0 && y <= myDocument.getDefaultPageSize().getTop());
@@ -115,7 +115,7 @@ public class Annotations {
 	 * @param height of rectangle
 	 * @return
 	 */
-	static boolean addBoxAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+	public static boolean addBoxAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
 		assert(myDocument != null);
 		assert (x >= 0 && x <= myDocument.getDefaultPageSize().getRight());
 		assert (y >= 0 && y <= myDocument.getDefaultPageSize().getTop());
@@ -134,7 +134,7 @@ public class Annotations {
 		return true;
 	}
 
-	static void printAnnots(PdfDocument myDocument, int pageNum) {
+	public static void printAnnots(PdfDocument myDocument, int pageNum) {
 		List<PdfAnnotation> myList = myDocument.getPage(pageNum).getAnnotations();
 
 		System.out.println("PageNum: " + pageNum);
@@ -143,7 +143,7 @@ public class Annotations {
 		}
 	}
 
-	static void deleteAnnot(PdfDocument myDocument, int pageNum, float x, float y) {
+	public static void deleteAnnot(PdfDocument myDocument, int pageNum, float x, float y) {
 		List<PdfAnnotation> myList = myDocument.getPage(pageNum).getAnnotations();
 
 		System.out.println("PageNum: " + pageNum);
