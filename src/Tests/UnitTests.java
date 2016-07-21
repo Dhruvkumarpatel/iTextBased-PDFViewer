@@ -19,11 +19,11 @@ import com.itextpdf.kernel.geom.Rectangle;
 
 public class UnitTests {
 
-	public static boolean checkInputFile(String filename){
+	public boolean checkInputFile(String filename){
 		return filename.endsWith(".pdf") && filename != null ;
 	}
 	
-	public static boolean checkFileSave(String fileToSave){
+	public boolean checkFileSave(String fileToSave){
 		File srcDir = new File("src/application/temp2.pdf");
 		File destDir = new File(fileToSave);
 		try {
@@ -36,23 +36,21 @@ public class UnitTests {
 	}
 	
 	@Test
-	public static void testInputFile() {
-		System.out.println("im here");
+	public void testInputFile() {
 		String fileName  = "temp.pdf";
 		assert(checkInputFile(fileName));
-		System.out.println((checkInputFile(fileName)));
 		System.out.println("Unit Test testInputFile: Passed!!");
 	}
 	
 	@Test
-	public static void testFileSave() {
+	public void testFileSave() {
 		String fileToSave  = "src/application/tempSave.pdf";
 		assert(checkFileSave(fileToSave));
 		System.out.println("Unit Test testFileSave: Passed!!");
 	}
 	
 	@Test
-	public static void testAddUnderlineAnnotation() throws IOException {
+	public void testAddUnderlineAnnotation() throws IOException {
 		String fileName  = "src/application/temp.pdf";
 		@SuppressWarnings("resource")
 		PdfDocument myDocument = new PdfDocument(new PdfReader(fileName));
@@ -66,7 +64,7 @@ public class UnitTests {
 	}
 	
 	@Test
-	public static void testAddHighlightAnnotation() throws IOException {
+	public void testAddHighlightAnnotation() throws IOException {
 		String fileName  = "src/application/temp.pdf";
 		@SuppressWarnings("resource")
 		PdfDocument myDocument = new PdfDocument(new PdfReader(fileName));
@@ -80,7 +78,7 @@ public class UnitTests {
 	}
 	
 	@Test
-	public static void testAddStrikeThroughAnnotation() throws IOException {
+	public void testAddStrikeThroughAnnotation() throws IOException {
 		String fileName  = "src/application/temp.pdf";
 		@SuppressWarnings("resource")
 		PdfDocument myDocument = new PdfDocument(new PdfReader(fileName));
@@ -94,7 +92,7 @@ public class UnitTests {
 	}
 	
 	@Test
-	public static void testAddBoxAnnotation() throws IOException {
+	public void testAddBoxAnnotation() throws IOException {
 		String fileName  = "src/application/temp.pdf";
 		@SuppressWarnings("resource")
 		PdfDocument myDocument = new PdfDocument(new PdfReader(fileName));
@@ -109,7 +107,7 @@ public class UnitTests {
 	
 	@Test
 	//deleteAnnot(PdfDocument myDocument, int pageNum, float x, float y)
-	public static void testDeleteAnnot() throws IOException {
+	public void testDeleteAnnot() throws IOException {
 		String fileName  = "src/application/temp.pdf";
 		@SuppressWarnings("resource")
 		PdfDocument myDocument = new PdfDocument(new PdfReader(fileName));
@@ -124,7 +122,7 @@ public class UnitTests {
 		System.out.println("Unit Test testDeleteAnnot: Passed!!");
 	}
 	
-	public static boolean testDeleteAnnot(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+	public boolean testDeleteAnnot(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
 		Annotations.deleteAnnot(myDocument, pageNum, x, y);
 		Rectangle rect = new Rectangle(x, y, width, height);
 		TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
@@ -132,14 +130,5 @@ public class UnitTests {
 		String str = PdfTextExtractor.getTextFromPage(myDocument.getPage(pageNum), strategy);
 		return str == null? true : false;
 	}
-	
-	static void main(String[] args) {
-		testInputFile();
-		testFileSave();
-		//testAddUnderlineAnnotation();
-		//testAddHighlightAnnotation();
-		//testAddStrikeThroughAnnotation();
-		//testAddBoxAnnotation();
-		//testDeleteAnnot();
-	}
+
 }
