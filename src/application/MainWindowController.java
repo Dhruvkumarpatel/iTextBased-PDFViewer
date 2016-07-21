@@ -61,10 +61,10 @@ public class MainWindowController {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("choose only pdf files");
 
-//		pdffile = chooser.showOpenDialog(new Stage());
+		pdffile = chooser.showOpenDialog(new Stage());
 
 		//Define specific file for testing
-		pdffile = new File("C:\\Users\\robin_000\\Documents\\ASE_Requirements.pdf");
+	//	pdffile = new File("C:\\Users\\robin_000\\Documents\\ASE_Requirements.pdf");
 
 
 		if(pdffile != null)

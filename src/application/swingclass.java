@@ -22,10 +22,13 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+import org.apache.commons.io.FileUtils;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.sun.pdfview.PDFFile;
@@ -45,7 +48,7 @@ public class swingclass extends JFrame implements ActionListener {
 
 	int mode = 0;
 
-	JButton next, previous, normal, highlight, underline, strikethrough, box, remove;
+	JButton next, previous, normal, highlight, underline, strikethrough, box, remove,save;
 
 	PDFFile pdffile;
 
@@ -115,6 +118,11 @@ public class swingclass extends JFrame implements ActionListener {
 		remove.setBounds(700, 10, 100, 30);
 		panel.add(remove);
 		remove.addActionListener(this);
+		
+		save = new JButton("SAVE");
+		save.setBounds(800,10,100,30);
+		panel.add(save);
+		save.addActionListener(this);
 
 		// load a pdf from a byte buffer
 		File file = new File(filename);
@@ -243,6 +251,33 @@ public class swingclass extends JFrame implements ActionListener {
 			mode = 4;
 		} else if (src == remove) {
 			mode = 5;
+		}
+		else if (src == save)
+		{
+
+			JFileChooser openFile = new JFileChooser();
+			openFile.setDialogTitle("select file for save");
+        //    openFile.showSaveDialog(swingclass.this);
+			
+			PdfDocumentcreation.savePDF();
+            
+            int userselection = openFile.showSaveDialog(this);
+          
+            if (userselection == JFileChooser.APPROVE_OPTION) {
+    			File fileToSave = openFile.getSelectedFile();
+    			System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+    			
+    			File srcDir = new File("src/application/temp2.pdf");
+    			File destDir = new File(fileToSave.getAbsolutePath());
+    			try {
+					FileUtils.copyFile(srcDir, destDir);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			
+    			
+    		}
 		}
 
 	}
