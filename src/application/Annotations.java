@@ -1,10 +1,14 @@
 package application;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfArray;
+import com.itextpdf.kernel.pdf.PdfDate;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfString;
 import com.itextpdf.kernel.pdf.annot.PdfAnnotation;
@@ -25,10 +29,15 @@ public class Annotations {
 	 * @return
 	 */
 	public static boolean addHighlightAnnotation(PdfDocument myDocument, float x, float y, float width, float height, int pageNum) {
+		
+		// pre condition assertion to check
 		assert(myDocument != null);
 		assert (x >= 0 && x <= myDocument.getDefaultPageSize().getRight());
 		assert (y >= 0 && y <= myDocument.getDefaultPageSize().getTop());
 		assert (pageNum > 0 && pageNum <= myDocument.getNumberOfPages());
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
 
 		System.out.println("LRTB: " + myDocument.getDefaultPageSize().getLeft() + " " + myDocument.getDefaultPageSize().getRight() + " " + myDocument.getDefaultPageSize().getTop() + " " + myDocument.getDefaultPageSize().getBottom());
 
@@ -38,11 +47,40 @@ public class Annotations {
                 .setTitle(new PdfString("Hello!"))
                 .setContents(new PdfString("I'm a popup."))
                 .setTitle(new PdfString("iText"))
+                .setDate(new PdfString(dateFormat.format(date)))
                 .setOpen(true);
 //                .setRectangle(new PdfArray(new float[]{100, 300, 200, 100}));
         myDocument.getPage(pageNum).addAnnotation(ann);
+        
+        // post condition assertion 
+        assert Annotations.checkAnnotation(myDocument, pageNum, x, y, width, height,date);
 
 		return true;
+	}
+	
+	static boolean  checkAnnotation(PdfDocument myDocument, int pageNum, float x, float y,float width,float height,Date date)
+	{
+		
+		List<PdfAnnotation> annoattionlist = myDocument.getPage(pageNum).getAnnotations();
+		
+		for (int i = 0; i < annoattionlist.size(); i++) {
+			if(x >= annoattionlist.get(i).getRectangle().getAsNumber(0).floatValue() &&
+					x <= annoattionlist.get(i).getRectangle().getAsNumber(2).floatValue() &&
+					y >= annoattionlist.get(i).getRectangle().getAsNumber(1).floatValue() &&
+					y <= annoattionlist.get(i).getRectangle().getAsNumber(3).floatValue()) {
+				
+				if(annoattionlist.get(i).getDate().equals(date))
+				{
+					return true;
+				}
+			
+					System.out.println("Removing: " + i);
+			}
+		}
+		
+		
+		
+		return false;
 	}
 
 	/**
